@@ -3,8 +3,18 @@
   width: 336px;
   display: grid;
   grid-template-columns: auto auto;
-  grid-template-columns: auto auto;
+  grid-template-rows: auto auto;
   gap: 16px 18px;
   justify-content: center;
   align-content: center;
+}
+
+@media screen and (max-width: 660px) {
+  .profile__info {
+    height: 54px;
+    width: 282px;
+    margin-bottom: 36px;
+    grid-template-columns: auto 39px;
+    gap: 14px 10px;
+  }
 }
