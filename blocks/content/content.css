@@ -6,3 +6,10 @@
   max-width: 880px;
   margin: 40px auto 0 auto;
 }
+
+@media screen and (max-width: 660px) {
+  .content {
+    gap: 36px;
+    margin-top: 42px;
+  }
+}
