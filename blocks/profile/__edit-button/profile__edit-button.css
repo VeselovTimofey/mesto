@@ -8,6 +8,10 @@
   align-items: center;
 }
 
+.profile__edit-button:hover {
+  opacity: 60%;
+}
+
 @media screen and (max-width: 660px) {
   .profile__edit-button {
     height: 18px;
