@@ -12,7 +12,7 @@
         <div class="header__line"></div>
     </header>
     <main class="content">
-        <section class="profile">
+        <section class="profile" id="profile">
             <img class="profile__avatar" src="images/avatar.png" alt="Аватар пользователя.">
             <div class="profile__info">
                 <h2 class="profile__name">Жак-Ив Кусто</h2>
@@ -57,9 +57,22 @@
                 <div class="element__like"></div>
             </div>
         </section>
+        <section class="edit-form" id="edit-form">
+            <div class="edit-form__overlay"></div>
+            <div class="edit-form__close-icon"></div>
+            <form class="edit-form__form">
+                <h2 class="edit-form__title">Редактировать профиль</h2>
+                <input type="text" class="edit-form__name">
+                <div class="edit-form__line"></div>
+                <input type="text" class="edit-form__profession">
+                <div class="edit-form__line"></div>
+                <button type="submit" class="edit-form__button">Сохранить</button>
+            </form>
+        </section>
     </main>
     <footer class="footer">
         <h2 class="footer__copyright">&#169; 2023 Mesto Russia</h2>
     </footer>
+    <script src="./scripts/index.js"></script>
 </body>
 </html>
