@@ -1,0 +1,12 @@
+.edit-form__close-icon {
+  position: fixed;
+  top: 155px;
+  right: calc(33.203125% - 40px);
+  height: 32px;
+  width: 32px;
+  background-image: url(../../../images/svg/close-icon.svg);
+}
+
+.edit-form__close-icon:hover {
+  opacity: 60%;
+}
