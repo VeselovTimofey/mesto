@@ -1,0 +1,11 @@
+.profile__add-vector {
+  height: 22px;
+  width: 22px;
+}
+
+@media screen and (max-width: 660px) {
+  .profile__add-vector {
+    height: 16px;
+    width: 16px;
+  }
+}

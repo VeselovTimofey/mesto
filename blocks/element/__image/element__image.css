@@ -1,0 +1,7 @@
+.element__image {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 10px 10px 0 0;
+  grid-row: 1;
+  grid-column: 1/3;
+}

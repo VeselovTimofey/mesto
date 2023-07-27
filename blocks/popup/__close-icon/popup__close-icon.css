@@ -1,0 +1,22 @@
+.popup__close-icon {
+  position: fixed;
+  top: 155px;
+  right: calc(33.203125% - 40px);
+  height: 32px;
+  width: 32px;
+  background-image: url(../../../images/svg/close-icon.svg);
+}
+
+.popup__close-icon:hover {
+  opacity: 60%;
+}
+
+@media screen and (max-width: 664px) {
+  .popup__close-icon {
+    top: 87px;
+    right: 5.9375%;
+    height: 20px;
+    width: 20px;
+    background-size: cover;
+  }
+}
