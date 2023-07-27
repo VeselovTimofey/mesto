@@ -8,3 +8,13 @@
   letter-spacing: 0em;
   text-align: left;
 }
+
+@media screen and (max-width: 664px) {
+  .edit-form__title {
+    margin: 25px 22px 75px 22px;
+    height: 22px;
+    width: 238px;
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
