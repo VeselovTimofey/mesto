@@ -12,3 +12,12 @@
   flex-direction: column;
   align-items: center;
 }
+
+@media screen and (max-width: 664px) {
+  .edit-form__form {
+    top: 123px;
+    right: 5.9375%;
+    height: 322px;
+    width: 282px;
+  }
+}
