@@ -1,4 +1,4 @@
-.edit-form__line {
+.popup__line {
   height: 0;
   width: 358px;
   opacity: 20%;
@@ -6,7 +6,7 @@
 }
 
 @media screen and (max-width: 664px) {
-  .edit-form__line {
+  .popup__line {
     width: 238px;
   }
 }

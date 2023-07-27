@@ -3,20 +3,20 @@ let nameProfile = profile.querySelector('.profile__name');
 let jobProfile = profile.querySelector('.profile__profession');
 let openPopup = profile.querySelector('.profile__edit-button');
 
-let popup = document.querySelector('#edit-form');
-let closePopup = popup.querySelector('.edit-form__close-icon');
-let nameInput = popup.querySelector('.edit-form__name');
-let jobInput = popup.querySelector('.edit-form__profession');
-let savePopup = popup.querySelector('.edit-form__button');
+let popup = document.querySelector('#popup');
+let closePopup = popup.querySelector('.popup__close-icon');
+let nameInput = popup.querySelector('.popup__name');
+let jobInput = popup.querySelector('.popup__profession');
+let savePopup = popup.querySelector('.popup__button');
 
 function openingPopup() {
     nameInput.value = nameProfile.textContent;
     jobInput.value = jobProfile.textContent;
-    popup.classList.add('edit-form_opened');
+    popup.classList.add('popup_opened');
 }
 
 function closingPopup() {
-    popup.classList.remove('edit-form_opened');
+    popup.classList.remove('popup_opened');
 }
 
 function handleFormSubmit(evt) {
