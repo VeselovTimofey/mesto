@@ -1,4 +1,4 @@
-.edit-form__form {
+.popup__form {
   position: fixed;
   top: 195px;
   right: 33.203125%;
@@ -14,7 +14,7 @@
 }
 
 @media screen and (max-width: 664px) {
-  .edit-form__form {
+  .popup__form {
     top: 123px;
     right: 5.9375%;
     height: 322px;

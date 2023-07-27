@@ -1,4 +1,4 @@
-.edit-form__close-icon {
+.popup__close-icon {
   position: fixed;
   top: 155px;
   right: calc(33.203125% - 40px);
@@ -7,12 +7,12 @@
   background-image: url(../../../images/svg/close-icon.svg);
 }
 
-.edit-form__close-icon:hover {
+.popup__close-icon:hover {
   opacity: 60%;
 }
 
 @media screen and (max-width: 664px) {
-  .edit-form__close-icon {
+  .popup__close-icon {
     top: 87px;
     right: 5.9375%;
     height: 20px;
