@@ -1,14 +1,16 @@
 .header {
   display: flex;
   flex-direction: column;
-  gap: 41px;
+  height: 73px;
   max-width: 880px;
   margin: 45px auto 0 auto;
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
 }
 
 @media screen and (max-width: 660px) {
   .header {
-    gap: 31.6px;
+    height: 55px;
     margin-top: 28px;
+    border-bottom: 1px solid rgba(84, 84, 84, .7);
   }
 }

@@ -2,6 +2,9 @@
   height: 24px;
   width: 24px;
   align-self: end;
+  padding: 0;
+  margin-bottom: 8px;
+  background: #000000;
   border: 1px solid #FFFFFF;
   display: flex;
   justify-content: center;
@@ -10,11 +13,14 @@
 
 .profile__edit-button:hover {
   opacity: 60%;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 660px) {
   .profile__edit-button {
     height: 18px;
     width: 18px;
+    align-self: center;
+    margin-bottom: 0;
   }
 }
