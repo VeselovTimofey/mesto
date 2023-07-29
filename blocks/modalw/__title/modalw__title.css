@@ -1,4 +1,4 @@
-.modal-window__title {
+.modalw__title {
   margin: 34px 64px 24px 36px;
   width: 330px;
   font-size: 24px;
@@ -9,7 +9,7 @@
 }
 
 @media screen and (max-width: 664px) {
-  .modal-window__title {
+  .modalw__title {
     margin: 25px 22px 45px 22px;
     width: 238px;
     font-size: 18px;
