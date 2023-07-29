@@ -1,22 +1,22 @@
-.popup__form {
+.popup__container {
   position: fixed;
   top: 195px;
-  right: 33.203125%;
+  right: calc(50% - 215px);
   height: 330px;
   width: 430px;
-  border: 1px solid #000000;
   border-radius: 10px;
   box-shadow: 0px 0px 25px 0px #00000026;
   background-color: #FFFFFF;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
 }
 
 @media screen and (max-width: 664px) {
-  .popup__form {
+  .popup__container {
     top: 123px;
-    right: 5.9375%;
+    right: calc(50% - 141px);
     height: 322px;
     width: 282px;
   }

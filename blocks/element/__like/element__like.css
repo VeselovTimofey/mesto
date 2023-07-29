@@ -1,8 +1,11 @@
 .element__like {
   justify-self: end;
   margin: 30px 20px 30px 0;
+  padding: 0;
+  border: 0;
   width: 22px;
   height: 19px;
+  background-color: #FFFFFF;
   grid-row: 2/3;
   grid-column: 2/3;
   background-image: url(../../../images/svg/like.svg);
@@ -10,4 +13,5 @@
 
 .element__like:hover {
   opacity: 50%;
+  cursor: pointer;
 }
