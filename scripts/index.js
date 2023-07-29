@@ -5,8 +5,8 @@ let openPopup = profile.querySelector('.profile__edit-button');
 
 let popup = document.querySelector('#popup');
 let closePopup = popup.querySelector('.popup__close-icon');
-let nameInput = popup.querySelector('.popup__name');
-let jobInput = popup.querySelector('.popup__profession');
+let nameInput = popup.querySelector('.popup__input_value_name');
+let jobInput = popup.querySelector('.popup__input_value_profession');
 let savePopup = popup.querySelector('.popup__button');
 
 function openingPopup() {
