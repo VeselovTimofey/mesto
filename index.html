@@ -61,13 +61,15 @@
         <p class="footer__copyright">&#169; 2023 Mesto Russia</p>
     </footer>
     <section class="popup" id="popup">
-        <form name="profile-editing" class="popup__container">
+        <div class="popup__container">
             <button type="button" class="popup__close-icon"></button>
-            <h2 class="modalw__title">Редактировать профиль</h2>
-            <input type="text" name="name" class="popup__input popup__input_value_name">
-            <input type="text" name="profession" class="popup__input popup__input_value_profession">
-            <button type="submit" class="popup__button">Сохранить</button>
-        </form>
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <form name="profile-editing" class="popup__form">
+                <input type="text" name="name" class="popup__input popup__input_value_name">
+                <input type="text" name="profession" class="popup__input popup__input_value_profession">
+                <button type="submit" class="popup__button">Сохранить</button>
+            </form>
+        </div>
     </section>
     <script src="./scripts/index.js"></script>
 </body>
