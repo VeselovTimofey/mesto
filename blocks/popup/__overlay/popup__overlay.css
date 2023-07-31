@@ -1,5 +1,4 @@
-.popup {
-  display: none;
+.popup__overlay {
   position: fixed;
   top: 0;
   right: 0;
