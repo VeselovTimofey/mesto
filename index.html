@@ -24,37 +24,7 @@
                 <img class="profile__add-vector" src="images/svg/add-button.svg" alt="Кнопка добавления элемента.">
             </button>
         </section>
-        <section class="elements">
-            <article class="element">
-                <img class="element__image" src="images/karachay.png" alt="Заброшенный монастырь на фоне гор.">
-                <h2 class="element__name">Карачаевск</h2>
-                <button class="element__like" type="button"></button>
-            </article>
-            <article class="element">
-                <img class="element__image" src="images/elbrus.png" alt="Холмы, на заднем плане горы.">
-                <h2 class="element__name">Гора Эльбрус</h2>
-                <button class="element__like" type="button"></button>
-            </article>
-            <article class="element">
-                <img class="element__image" src="images/dombay.png" alt="Лес, на заднем плане горы.">
-                <h2 class="element__name">Домбай</h2>
-                <button class="element__like" type="button"></button>
-            </article>
-            <article class="element">
-                <img class="element__image" src="images/elbrus.png" alt="Холмы, на заднем плане горы.">
-                <h2 class="element__name">Гора Эльбрус</h2>
-                <button class="element__like" type="button"></button>
-            </article>
-            <article class="element">
-                <img class="element__image" src="images/dombay.png" alt="Лес, на заднем плане горы.">
-                <h2 class="element__name">Домбай</h2>
-                <button class="element__like" type="button"></button>
-            </article>
-            <article class="element">
-                <img class="element__image" src="images/karachay.png" alt="Заброшенный монастырь на фоне гор.">
-                <h2 class="element__name">Карачаево-Черкессия</h2>
-                <button class="element__like" type="button"></button>
-            </article>
+        <section class="elements" id="elements">
         </section>
     </main>
     <footer class="footer">
@@ -71,6 +41,13 @@
             </form>
         </div>
     </section>
+    <template id="element">
+        <article class="element">
+            <img class="element__image">
+            <h2 class="element__name"></h2>
+            <button class="element__like" type="button"></button>
+        </article>
+    </template>
     <script src="./scripts/index.js"></script>
 </body>
 </html>
