@@ -66,33 +66,19 @@ function elementInitialization (initialElement) {
     let newElement = element.querySelector('.element').cloneNode(true);
     newElement.querySelector('.element__image').src = initialElement['link'];
     newElement.querySelector('.element__name').textContent = initialElement['name'];
-    let likeButton = newElement.querySelector('.element__like');
-    likeButton.id = initialElement.name.split(' ')[0];
-    let DeleteButton = newElement.querySelector('.element__delete');
-    DeleteButton.id = initialElement.name.split(' ')[0] + '_delete';
+    newElement.querySelector('.element__like').addEventListener('click', (evt) => {
+        evt.target.classList.toggle('element__like_active');
+    });
+    newElement.querySelector('.element__delete').addEventListener('click', (evt) => {
+        evt.target.parentElement.remove();
+    });
     return newElement;
-};
-
-function initialLikeElement(idButton) {
-    let newLikeButton = document.querySelector(`#${idButton}`);
-    newLikeButton.addEventListener('click', () => {
-        newLikeButton.classList.toggle('element__like_active');
-    });
-};
-
-function initialDeleteElement(idButton) {
-    let newDeleteButton = document.querySelector(`#${idButton}`);
-    newDeleteButton.addEventListener('click', () => {
-        newDeleteButton.parentElement.remove();
-    });
 };
 
 function elementFormSubmit(evt) {
     evt.preventDefault();
     const newElement = {name: placeInput.value, link: imageInput.value};
     elements.prepend(elementInitialization(newElement));
-    initialLikeElement(newElement.name.split(' ')[0]);
-    initialDeleteElement(newElement.name.split(' ')[0] + '_delete');
     closingPopup(popupElement);
 };
 
@@ -100,10 +86,6 @@ function firstElementsInitialization () {
     for (let initialElement of initialElements) {
         let newElement = elementInitialization(initialElement);
         elements.append(newElement);
-        let likeButton = newElement.querySelector('.element__like');
-        initialLikeElement(likeButton.id);
-        let DeleteButton = newElement.querySelector('.element__delete');
-        initialDeleteElement(DeleteButton.id);
     };
 };
 
