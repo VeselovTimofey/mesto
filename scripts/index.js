@@ -45,6 +45,8 @@ const initialElements = [
   }
 ];
 
+const popupImage = document.querySelector('#popup-image').content;
+
 function openingPopup(firstInput, secondInput, place, firstOutput = '', secondOutput = '') {
     firstInput.value = firstOutput;
     secondInput.value = secondOutput;
@@ -62,6 +64,18 @@ function handleFormSubmit(evt) {
     closingPopup(popup);
 };
 
+function openingImage (evt) {
+    let openImage = popupImage.querySelector('.popup').cloneNode(true);
+    openImage.querySelector('.popup__image').src = evt.target.src;
+    openImage.querySelector('.popup__description').textContent = evt.target.parentElement.querySelector('.element__name').textContent;
+    openImage.querySelector('.popup__close-icon').addEventListener('click', (evt) => {
+        evt.target.parentElement.parentElement.classList.remove('popup_opened');
+        setTimeout(() => {evt.target.parentElement.parentElement.remove()}, 500);
+    });
+    popupElement.after(openImage);
+    setTimeout(() => {openImage.classList.add('popup_opened')}, 5);
+};
+
 function elementInitialization (initialElement) {
     let newElement = element.querySelector('.element').cloneNode(true);
     newElement.querySelector('.element__image').src = initialElement['link'];
@@ -72,6 +86,7 @@ function elementInitialization (initialElement) {
     newElement.querySelector('.element__delete').addEventListener('click', (evt) => {
         evt.target.parentElement.remove();
     });
+    newElement.querySelector('.element__image').addEventListener('click', openingImage);
     return newElement;
 };
 
