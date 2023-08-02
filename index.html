@@ -11,7 +11,7 @@
         <img class="header__logo" src="images/svg/logo.svg" alt="Логотип 'место'.">
     </header>
     <main class="content">
-        <section class="profile" id="profile">
+        <section class="profile">
             <img class="profile__avatar" src="images/avatar.png" alt="Аватар пользователя.">
             <div class="profile__info">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -24,13 +24,13 @@
                 <img class="profile__add-vector" src="images/svg/add-button.svg" alt="Кнопка добавления элемента.">
             </button>
         </section>
-        <section class="elements" id="elements">
+        <section class="elements" aria-label="Карточки мест.">
         </section>
     </main>
     <footer class="footer">
         <p class="footer__copyright">&#169; 2023 Mesto Russia</p>
     </footer>
-    <section class="popup" id="popup">
+    <section class="popup popup_type_profile">
         <div class="popup__container">
             <button type="button" class="popup__close-icon"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
@@ -41,7 +41,7 @@
             </form>
         </div>
     </section>
-    <section class="popup" id="popup-element">
+    <section class="popup popup_type_add-card">
         <div class="popup__container">
             <button type="button" class="popup__close-icon"></button>
             <h2 class="popup__title">Новое место</h2>
@@ -52,6 +52,13 @@
             </form>
         </div>
     </section>
+    <section class="popup popup_type_picture">
+        <div class="popup__image-frame">
+            <img class="popup__image">
+            <button type="button" class="popup__close-icon"></button>
+            <h2 class="popup__description"></h2>
+        </div>
+    </section>
     <template id="element">
         <article class="element">
             <button class="element__delete" type="button"></button>
@@ -60,15 +67,7 @@
             <button class="element__like" type="button"></button>
         </article>
     </template>
-    <template id="popup-image">
-        <section class="popup">
-            <div class="popup__image-frame">
-                <img class="popup__image">
-                <button type="button" class="popup__close-icon"></button>
-                <h2 class="popup__description"></h2>
-            </div>
-        </section>
-    </template>
+    <script src="./scripts/cards.js"></script>
     <script src="./scripts/index.js"></script>
 </body>
 </html>
