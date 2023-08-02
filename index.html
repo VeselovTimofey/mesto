@@ -24,37 +24,7 @@
                 <img class="profile__add-vector" src="images/svg/add-button.svg" alt="Кнопка добавления элемента.">
             </button>
         </section>
-        <section class="elements">
-            <article class="element">
-                <img class="element__image" src="images/karachay.png" alt="Заброшенный монастырь на фоне гор.">
-                <h2 class="element__name">Карачаевск</h2>
-                <button class="element__like" type="button"></button>
-            </article>
-            <article class="element">
-                <img class="element__image" src="images/elbrus.png" alt="Холмы, на заднем плане горы.">
-                <h2 class="element__name">Гора Эльбрус</h2>
-                <button class="element__like" type="button"></button>
-            </article>
-            <article class="element">
-                <img class="element__image" src="images/dombay.png" alt="Лес, на заднем плане горы.">
-                <h2 class="element__name">Домбай</h2>
-                <button class="element__like" type="button"></button>
-            </article>
-            <article class="element">
-                <img class="element__image" src="images/elbrus.png" alt="Холмы, на заднем плане горы.">
-                <h2 class="element__name">Гора Эльбрус</h2>
-                <button class="element__like" type="button"></button>
-            </article>
-            <article class="element">
-                <img class="element__image" src="images/dombay.png" alt="Лес, на заднем плане горы.">
-                <h2 class="element__name">Домбай</h2>
-                <button class="element__like" type="button"></button>
-            </article>
-            <article class="element">
-                <img class="element__image" src="images/karachay.png" alt="Заброшенный монастырь на фоне гор.">
-                <h2 class="element__name">Карачаево-Черкессия</h2>
-                <button class="element__like" type="button"></button>
-            </article>
+        <section class="elements" id="elements">
         </section>
     </main>
     <footer class="footer">
@@ -71,6 +41,34 @@
             </form>
         </div>
     </section>
+    <section class="popup" id="popup-element">
+        <div class="popup__container">
+            <button type="button" class="popup__close-icon"></button>
+            <h2 class="popup__title">Новое место</h2>
+            <form name="profile-editing" class="popup__form">
+                <input type="text" name="place" placeholder="Название" class="popup__input popup__input_value_place">
+                <input type="text" name="image" placeholder="Ссылка на картинку" class="popup__input popup__input_value_image">
+                <button type="submit" class="popup__button">Создать</button>
+            </form>
+        </div>
+    </section>
+    <template id="element">
+        <article class="element">
+            <button class="element__delete" type="button"></button>
+            <img class="element__image">
+            <h2 class="element__name"></h2>
+            <button class="element__like" type="button"></button>
+        </article>
+    </template>
+    <template id="popup-image">
+        <section class="popup">
+            <div class="popup__image-frame">
+                <img class="popup__image">
+                <button type="button" class="popup__close-icon"></button>
+                <h2 class="popup__description"></h2>
+            </div>
+        </section>
+    </template>
     <script src="./scripts/index.js"></script>
 </body>
 </html>
