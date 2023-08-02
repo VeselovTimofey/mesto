@@ -68,6 +68,8 @@ function elementInitialization (initialElement) {
     newElement.querySelector('.element__name').textContent = initialElement['name'];
     let likeButton = newElement.querySelector('.element__like');
     likeButton.id = initialElement.name.split(' ')[0];
+    let DeleteButton = newElement.querySelector('.element__delete');
+    DeleteButton.id = initialElement.name.split(' ')[0] + '_delete';
     return newElement;
 };
 
@@ -78,11 +80,19 @@ function initialLikeElement(idButton) {
     });
 };
 
+function initialDeleteElement(idButton) {
+    let newDeleteButton = document.querySelector(`#${idButton}`);
+    newDeleteButton.addEventListener('click', () => {
+        newDeleteButton.parentElement.remove();
+    });
+};
+
 function elementFormSubmit(evt) {
     evt.preventDefault();
     const newElement = {name: placeInput.value, link: imageInput.value};
     elements.prepend(elementInitialization(newElement));
     initialLikeElement(newElement.name.split(' ')[0]);
+    initialDeleteElement(newElement.name.split(' ')[0] + '_delete');
     closingPopup(popupElement);
 };
 
@@ -92,22 +102,24 @@ function firstElementsInitialization () {
         elements.append(newElement);
         let likeButton = newElement.querySelector('.element__like');
         initialLikeElement(likeButton.id);
+        let DeleteButton = newElement.querySelector('.element__delete');
+        initialDeleteElement(DeleteButton.id);
     };
 };
 
 firstElementsInitialization();
-openPopupElement.addEventListener('click', function () {
+openPopupElement.addEventListener('click', () => {
     openingPopup(placeInput, imageInput, popupElement);
 });
-closePopupElement.addEventListener('click', function () {
+closePopupElement.addEventListener('click', () => {
     closingPopup(popupElement);
 });
 popupElement.addEventListener('submit', elementFormSubmit);
 
-openPopup.addEventListener('click', function () {
+openPopup.addEventListener('click', () => {
     openingPopup(nameInput, jobInput, popup, nameProfile.textContent, jobProfile.textContent);
 });
-closePopup.addEventListener('click', function () {
+closePopup.addEventListener('click', () => {
     closingPopup(popup);
 });
 popup.addEventListener('submit', handleFormSubmit);
