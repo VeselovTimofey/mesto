@@ -63,22 +63,35 @@ function handleFormSubmit(evt) {
 };
 
 function elementInitialization (initialElement) {
-    newElement = element.querySelector('.element').cloneNode(true);
+    let newElement = element.querySelector('.element').cloneNode(true);
     newElement.querySelector('.element__image').src = initialElement['link'];
     newElement.querySelector('.element__name').textContent = initialElement['name'];
-    elements.append(newElement);
+    let likeButton = newElement.querySelector('.element__like');
+    likeButton.id = initialElement.name.split(' ')[0];
+    return newElement;
+};
+
+function initialLikeElement(idButton) {
+    let newLikeButton = document.querySelector(`#${idButton}`);
+    newLikeButton.addEventListener('click', () => {
+        newLikeButton.classList.toggle('element__like_active');
+    });
 };
 
 function elementFormSubmit(evt) {
     evt.preventDefault();
     const newElement = {name: placeInput.value, link: imageInput.value};
-    elementInitialization(newElement);
+    elements.prepend(elementInitialization(newElement));
+    initialLikeElement(newElement.name.split(' ')[0]);
     closingPopup(popupElement);
 };
 
 function firstElementsInitialization () {
     for (let initialElement of initialElements) {
-        elementInitialization(initialElement);
+        let newElement = elementInitialization(initialElement);
+        elements.append(newElement);
+        let likeButton = newElement.querySelector('.element__like');
+        initialLikeElement(likeButton.id);
     };
 };
 
