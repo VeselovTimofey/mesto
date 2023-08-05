@@ -12,6 +12,7 @@ const savePopup = popup.querySelector('.popup__button');
 
 const popupElement = document.querySelector('.popup_type_add-card');
 const closePopupElement = popupElement.querySelector('.popup__close-icon');
+const formPopupElement = popupElement.querySelector('.popup__form');
 const placeInput = popupElement.querySelector('.popup__input_value_place');
 const imageInput = popupElement.querySelector('.popup__input_value_image');
 const savePopupElement = popupElement.querySelector('.popup__button');
@@ -31,17 +32,28 @@ function openingPopup(popup) {
 function openingPopupProfile() {
     nameInput.value = nameProfile.textContent;
     jobInput.value = jobProfile.textContent;
+    toggleButtonState([nameInput, jobInput], savePopup, config);
     openingPopup(popup);
+    escClosing(popup);
 };
 
 function closingPopup(popup) {
     popup.classList.remove('popup_opened');
 };
 
+function escClosing(popup) {
+    document.addEventListener('keydown', (evt) => {
+        if (evt.key === 'Escape') {
+            closingPopup(popup);
+        }
+    });
+};
+
 function openingPopupElement() {
-    placeInput.value = '';
-    imageInput.value = '';
+    formPopupElement.reset();
+    toggleButtonState([placeInput, imageInput], savePopupElement, config);
     openingPopup(popupElement);
+    escClosing(popupElement);
 };
 
 function handleFormSubmit(evt) {
@@ -55,11 +67,12 @@ function openingPopupImage(pictureNewElement, descriptionNewElement) {
     picturePopupImage.src = pictureNewElement;
     descriptionPopupImage.textContent = descriptionNewElement;
     openingPopup(popupImage);
+    escClosing(popupImage);
 };
 
 function elementInitialization(initialElement) {
-    let newElement = element.querySelector('.element').cloneNode(true);
-    let imageNewElement = newElement.querySelector('.element__image');
+    const newElement = element.querySelector('.element').cloneNode(true);
+    const imageNewElement = newElement.querySelector('.element__image');
     imageNewElement.src = initialElement['link'];
     newElement.querySelector('.element__name').textContent = initialElement['name'];
     newElement.querySelector('.element__like').addEventListener('click', (evt) => {
@@ -82,8 +95,8 @@ function elementFormSubmit(evt) {
 };
 
 function firstElementsInitialization() {
-    for (let initialElement of initialElements) {
-        let newElement = elementInitialization(initialElement);
+    for (const initialElement of initialElements) {
+        const newElement = elementInitialization(initialElement);
         elements.append(newElement);
     };
 };
@@ -93,14 +106,30 @@ openPopupElement.addEventListener('click', openingPopupElement);
 closePopupElement.addEventListener('click', () => {
     closingPopup(popupElement);
 });
+popupElement.addEventListener('click', (evt) => {
+    if (evt.target === popupElement) {
+        closingPopup(popupElement);
+    };
+});
 popupElement.addEventListener('submit', elementFormSubmit);
 
 openPopup.addEventListener('click', openingPopupProfile);
 closePopup.addEventListener('click', () => {
     closingPopup(popup);
 });
+popup.addEventListener('click', (evt) => {
+    if (evt.target === popup) {
+        closingPopup(popup);
+    };
+});
 popup.addEventListener('submit', handleFormSubmit);
 
 closePopupImage.addEventListener('click', () => {
     closingPopup(popupImage);
+});
+
+popupImage.addEventListener('click', (evt) => {
+    if (evt.target === popupImage) {
+        closingPopup(popupImage);
+    };
 });
