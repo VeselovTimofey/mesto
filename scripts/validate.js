@@ -1,12 +1,12 @@
 const showInputError = (formElement, inputElement, errorMessage, config) => {
-    const errorElement = formElement.querySelector(`.popup__input-error_value_${inputElement.name}`);
+    const errorElement = formElement.querySelector(config.spanErrorSelector + inputElement.name);
     inputElement.classList.add(config.inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(config.errorClass);
 };
 
 const hideInputError = (formElement, inputElement, config) => {
-    const errorElement = formElement.querySelector(`.popup__input-error_value_${inputElement.name}`);
+    const errorElement = formElement.querySelector(config.spanErrorSelector + inputElement.name);
     inputElement.classList.remove(config.inputErrorClass);
     errorElement.classList.remove(config.errorClass);
     errorElement.textContent = '';
