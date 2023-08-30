@@ -28,6 +28,7 @@ const descriptionPopupFullImage = popupFullImage.querySelector('.popup__descript
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', closePopupWithEscape);
 };
 
 function closePopup(popup) {
@@ -49,7 +50,6 @@ function openPopupProfile() {
     hideInputError(formPopupProfile, inputJobPopupProfile, config);
     toggleButtonState([inputNamePopupProfile, inputJobPopupProfile], buttonSavePopupProfile, config);
     openPopup(popupProfile);
-    document.addEventListener('keydown', closePopupWithEscape);
 };
 
 function openPopupAddNewCard() {
@@ -58,7 +58,6 @@ function openPopupAddNewCard() {
     hideInputError(formPopupAddNewCard, inputImagePopupAddNewCard, config);
     toggleButtonState([inputPlacePopupAddNewCard, inputImagePopupAddNewCard], buttonSavePopupAddNewCard, config);
     openPopup(popupAddNewCard);
-    document.addEventListener('keydown', closePopupWithEscape);
 };
 
 function openPopupFullImage(pictureNewElement, descriptionNewElement) {
@@ -66,7 +65,6 @@ function openPopupFullImage(pictureNewElement, descriptionNewElement) {
     picturePopupFullImage.alt = descriptionNewElement;
     descriptionPopupFullImage.textContent = descriptionNewElement;
     openPopup(popupFullImage);
-    document.addEventListener('keydown', closePopupWithEscape);
 };
 
 function handleProfileFormSubmit(evt) {
