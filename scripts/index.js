@@ -1,3 +1,5 @@
+import {Card} from './card.js';
+
 const profile = document.querySelector('.profile');
 const nameProfile = profile.querySelector('.profile__name');
 const jobProfile = profile.querySelector('.profile__profession');
@@ -82,7 +84,7 @@ function handleNewCardFormSubmit(evt) {
 };
 
 function InitializationNewCard(initialElement) {
-    const newElement = newCard.querySelector('.element').cloneNode(true);
+    /* const newElement = newCard.querySelector('.element').cloneNode(true);
     const imageNewElement = newElement.querySelector('.element__image');
     imageNewElement.src = initialElement['link'];
     imageNewElement.alt = initialElement['name'];
@@ -96,13 +98,20 @@ function InitializationNewCard(initialElement) {
     imageNewElement.addEventListener('click', () => {
         openPopupFullImage(initialElement['link'], initialElement['name'])
     });
-    return newElement;
+    return newElement; */
+    const card = new Card(initialElement, '#element');
+    const cardElement = card.generateCard();
+    cardElement.querySelector('.element__image').addEventListener('click', () => {
+        openPopupFullImage(initialElement['link'], initialElement['name'])
+    });
+    return cardElement;
 };
 
 function initializationFirstElements() {
     for (const initialElement of initialElements) {
-        const newElement = InitializationNewCard(initialElement);
-        cards.append(newElement);
+        //const newElement = InitializationNewCard(initialElement);
+        //cards.append(newElement);
+        cards.append(InitializationNewCard(initialElement));
     };
 };
 
