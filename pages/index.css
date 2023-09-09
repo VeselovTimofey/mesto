@@ -32,6 +32,7 @@
 @import url(../blocks/popup/_type/popup_type_profile.css);
 @import url(../blocks/popup/_type/popup_type_add-card.css);
 @import url(../blocks/popup/_type/popup_type_picture.css);
+@import url(../blocks/popup/_background/popup_background_black.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__close-icon/popup__close-icon.css);
 @import url(../blocks/popup/__title/popup__title.css);

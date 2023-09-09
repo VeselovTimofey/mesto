@@ -1,8 +1,9 @@
 export class Card {
-    constructor(data, templateSelector) {
+    constructor(data, templateSelector, openPopupFullImage) {
         this._image = data.link;
         this._name = data.name;
         this._templateSelector = templateSelector;
+        this._openPopupFullImage = openPopupFullImage;
     }
 
     _getTemplate() {
@@ -15,13 +16,28 @@ export class Card {
         return cardElement;
     }
 
-    _setEventListeners() {
+    _setLikeEventListener() {
         this._newCard.querySelector('.element__like').addEventListener('click', (evt) => {
             evt.target.classList.toggle('element__like_active');
         });
+    }
+
+    _setDeleteEventListener() {
         this._newCard.querySelector('.element__delete').addEventListener('click', () => {
             this._newCard.remove();
         });
+    }
+
+    _setFullImageEventListener() {
+        this._newCard.querySelector('.element__image').addEventListener('click', () => {
+            this._openPopupFullImage(this._image, this._name)
+        });
+    }
+
+    _setEventListeners() {
+        this._setLikeEventListener();
+        this._setDeleteEventListener();
+        this._setFullImageEventListener();
     }
 
     generateCard() {
