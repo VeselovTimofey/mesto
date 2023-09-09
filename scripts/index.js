@@ -1,5 +1,7 @@
 import {Card} from './card.js';
 import {FormValidator} from './FormValidator.js';
+import {initialElements} from './cards.js';
+import {config} from './config.js';
 
 const profile = document.querySelector('.profile');
 const nameProfile = profile.querySelector('.profile__name');
@@ -25,6 +27,12 @@ const picturePopupFullImage = popupFullImage.querySelector('.popup__image');
 const buttonClosePopupFullImage = popupFullImage.querySelector('.popup__close-icon');
 const descriptionPopupFullImage = popupFullImage.querySelector('.popup__description');
 
+const profileFormValidator = new FormValidator(config, popupProfile);
+profileFormValidator.enableValidation();
+
+const newCardFormValidator = new FormValidator(config, popupAddNewCard);
+newCardFormValidator.enableValidation();
+
 function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', closePopupWithEscape);
@@ -45,15 +53,13 @@ function closePopupWithEscape(evt) {
 function openPopupProfile() {
     inputNamePopupProfile.value = nameProfile.textContent;
     inputJobPopupProfile.value = jobProfile.textContent;
-    const profileFormValidator = new FormValidator(config, popupProfile);
-    profileFormValidator.enableValidation();
+    profileFormValidator.resetValidationState();
     openPopup(popupProfile);
 };
 
 function openPopupAddNewCard() {
     formPopupAddNewCard.reset();
-    const newCardFormValidator = new FormValidator(config, popupAddNewCard);
-    newCardFormValidator.enableValidation();
+    newCardFormValidator.resetValidationState();
     openPopup(popupAddNewCard);
 };
 
@@ -74,26 +80,23 @@ function handleProfileFormSubmit(evt) {
 function handleNewCardFormSubmit(evt) {
     evt.preventDefault();
     const newElement = {name: inputPlacePopupAddNewCard.value, link: inputImagePopupAddNewCard.value};
-    cards.prepend(InitializationNewCard(newElement));
+    cards.prepend(createNewCard(newElement));
     closePopup(popupAddNewCard);
 };
 
-function InitializationNewCard(initialElement) {
-    const card = new Card(initialElement, '#element');
+function createNewCard(initialElement) {
+    const card = new Card(initialElement, '#element', openPopupFullImage);
     const cardElement = card.generateCard();
-    cardElement.querySelector('.element__image').addEventListener('click', () => {
-        openPopupFullImage(initialElement['link'], initialElement['name'])
-    });
     return cardElement;
 };
 
-function initializationFirstElements() {
+function initializeFirstElements() {
     for (const initialElement of initialElements) {
-        cards.append(InitializationNewCard(initialElement));
+        cards.append(createNewCard(initialElement));
     };
 };
 
-initializationFirstElements();
+initializeFirstElements();
 buttonOpenPopupAddNewCard.addEventListener('click', openPopupAddNewCard);
 buttonClosePopupAddNewCard.addEventListener('click', () => {
     closePopup(popupAddNewCard);
