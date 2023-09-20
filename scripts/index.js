@@ -3,9 +3,9 @@ import {FormValidator} from './FormValidator.js';
 import {initialElements} from './cards.js';
 import {config} from './config.js';
 
-const profile = document.querySelector('.profile');
-const nameProfile = profile.querySelector('.profile__name');
-const jobProfile = profile.querySelector('.profile__profession');
+export const profile = document.querySelector('.profile');
+export const nameProfile = profile.querySelector('.profile__name');
+export const jobProfile = profile.querySelector('.profile__profession');
 const buttonOpenPopupProfile = profile.querySelector('.profile__edit-button');
 const buttonOpenPopupAddNewCard = profile.querySelector('.profile__add-button');
 

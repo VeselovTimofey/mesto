@@ -22,7 +22,7 @@ export class Popup {
 
     setEventListeners() {
         this._popup = document.querySelector(this._popupSelector);
-        this._buttonClosePopup = this._element.querySelector('.popup__close-icon');
+        this._buttonClosePopup = this._popup.querySelector('.popup__close-icon');
         this._buttonClosePopup.addEventListener('click', () => {
             this.close();
         })
