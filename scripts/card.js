@@ -16,37 +16,27 @@ export class Card {
         return cardElement;
     }
 
-    _setLikeEventListener() {
-        this._newCard.querySelector('.element__like').addEventListener('click', (evt) => {
-            evt.target.classList.toggle('element__like_active');
-        });
+    _likeCard(evt) {
+        evt.target.classList.toggle('element__like_active');
     }
 
-    _setDeleteEventListener() {
-        this._newCard.querySelector('.element__delete').addEventListener('click', () => {
-            this._newCard.remove();
-        });
-    }
-
-    _setFullImageEventListener() {
-        this._newCard.querySelector('.element__image').addEventListener('click', () => {
-            this._openPopupFullImage(this._image, this._name)
-        });
+    _deleteCard() {
+        this._newCard.remove();
     }
 
     _setEventListeners() {
-        this._setLikeEventListener();
-        this._setDeleteEventListener();
-        this._setFullImageEventListener();
+        this._newCard.querySelector('.element__like').addEventListener('click', (evt) => {this._likeCard(evt)});
+        this._newCard.querySelector('.element__delete').addEventListener('click', () => {this._deleteCard()});
+        this._imageNewCard.addEventListener('click', () => {this._openPopupFullImage(this._image, this._name)});
     }
 
     generateCard() {
         this._newCard = this._getTemplate();
-        this._setEventListeners();
         this._imageNewCard = this._newCard.querySelector('.element__image');
         this._imageNewCard.src = this._image;
         this._imageNewCard.alt = this._name;
         this._newCard.querySelector('.element__name').textContent = this._name;
+        this._setEventListeners();
         return this._newCard;
     }
 }
