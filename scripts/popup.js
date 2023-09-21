@@ -1,6 +1,6 @@
 export class Popup {
     constructor(popupSelector) {
-        this._popupSelector = popupSelector;
+        this._popup = document.querySelector(popupSelector);
     }
 
     open() {
@@ -14,14 +14,12 @@ export class Popup {
     }
 
     _handleEscClose(evt) {
-        if(evt.key === 'Escape') {
-            const openedPopup = document.querySelector(this._popupSelector)
-            this.close(openedPopup);
+        if (evt.key === 'Escape') {
+            this.close();
         }
     }
 
     setEventListeners() {
-        this._popup = document.querySelector(this._popupSelector);
         this._buttonClosePopup = this._popup.querySelector('.popup__close-icon');
         this._buttonClosePopup.addEventListener('click', () => {
             this.close();
