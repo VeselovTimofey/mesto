@@ -1,19 +1,21 @@
-import {PopupWithImage} from './PopupWithImage.js'
-import {PopupWithForm} from './PopupWithForm.js';
-import {UserInfo} from './UserInfo.js';
-import {Card} from './card.js';
-import {Section} from './section.js';
-import {FormValidator} from './FormValidator.js';
-import {initialElements} from './cards.js';
-import {config} from './config.js';
+import {PopupWithImage} from '../components/PopupWithImage.js'
+import {PopupWithForm} from '../components/PopupWithForm.js';
+import {UserInfo} from '../components/UserInfo.js';
+import {Card} from '../components/card.js';
+import {Section} from '../components/section.js';
+import {FormValidator} from '../components/FormValidator.js';
+import {initialElements} from '../utils/cards.js';
+import {config} from '../utils/config.js';
 
-const popupProfile = document.querySelector('.popup_type_profile');
-const buttonOpenPopupProfile = document.querySelector('.profile__edit-button');
-const inputNamePopupProfile = document.querySelector('.popup__input_value_name');
-const inputJobPopupProfile = document.querySelector('.popup__input_value_profession');
-const buttonOpenPopupAddNewCard = document.querySelector('.profile__add-button');
-const popupAddNewCard = document.querySelector('.popup_type_add-card');
-const formPopupAddNewCard = popupAddNewCard.querySelector('.popup__form');
+import {
+    popupProfile,
+    buttonOpenPopupProfile,
+    inputNamePopupProfile,
+    inputJobPopupProfile,
+    buttonOpenPopupAddNewCard,
+    popupAddNewCard,
+    formPopupAddNewCard
+} from '../utils/constants.js';
 
 const popupWithImage = new PopupWithImage('.popup_type_picture');
 
@@ -73,7 +75,7 @@ buttonOpenPopupProfile.addEventListener('click', () => {
 buttonOpenPopupAddNewCard.addEventListener('click', () => {
     formPopupAddNewCard.reset();
     popupNewCard.open();
-    //newCardFormValidator.resetValidationState();
+    newCardFormValidator.resetValidationState();
 })
 
 firstCards.renderItems();
