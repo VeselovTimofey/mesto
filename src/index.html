@@ -3,25 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./pages/index.css">
     <title>Место</title>
 </head>
 <body class="page">
     <header class="header">
-        <img class="header__logo" src="images/svg/logo.svg" alt="Логотип 'место'.">
+        <img class="header__logo" src="<%=require('./images/svg/logo.svg')%>" alt="Логотип 'место'.">
     </header>
     <main class="content">
         <section class="profile">
-            <img class="profile__avatar" src="images/avatar.png" alt="Аватар пользователя.">
+            <img class="profile__avatar" src="<%=require('./images/avatar.png')%>" alt="Аватар пользователя.">
             <div class="profile__info">
                 <h1 class="profile__name">Жак-Ив Кусто</h1>
                 <p class="profile__profession">Исследователь океана</p>
                 <button class="profile__edit-button" type="button">
-                    <img class="profile__edit-vector" src="images/svg/edit-button.svg" alt="Кнопка изменения параметров пользователя.">
+                    <img class="profile__edit-vector" src="<%=require('./images/svg/edit-button.svg')%>" alt="Кнопка изменения параметров пользователя.">
                 </button>
             </div>
             <button class="profile__add-button" type="button">
-                <img class="profile__add-vector" src="images/svg/add-button.svg" alt="Кнопка добавления элемента.">
+                <img class="profile__add-vector" src="<%=require('./images/svg/add-button.svg')%>" alt="Кнопка добавления элемента.">
             </button>
         </section>
         <section class="elements" aria-label="Карточки мест.">
@@ -48,10 +47,10 @@
             <button type="button" class="popup__close-icon"></button>
             <h2 class="popup__title">Новое место</h2>
             <form name="add-place" class="popup__form" novalidate>
-                <input type="text" name="place" placeholder="Название" class="popup__input popup__input_value_place" minlength=2 maxlength=30 required>
-                <span class="popup__input-error popup__input-error_value_place"></span>
-                <input type="url" name="image" placeholder="Ссылка на картинку" class="popup__input popup__input_value_image" required>
-                <span class="popup__input-error popup__input-error_value_image"></span>
+                <input type="text" name="name" placeholder="Название" class="popup__input popup__input_value_place" minlength=2 maxlength=30 required>
+                <span class="popup__input-error popup__input-error_value_name"></span>
+                <input type="url" name="link" placeholder="Ссылка на картинку" class="popup__input popup__input_value_image" required>
+                <span class="popup__input-error popup__input-error_value_link"></span>
                 <button type="submit" class="popup__button">Создать</button>
             </form>
         </div>
@@ -71,6 +70,5 @@
             <button class="element__like" type="button"></button>
         </article>
     </template>
-    <script type="module" src="./scripts/index.js"></script>
 </body>
 </html>
