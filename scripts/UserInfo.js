@@ -1,17 +1,15 @@
-import profile from './index';
-
 export class UserInfo {
     constructor(data) {
-        this._nameProfile = profile.querySelector(data.nameSelector);
-        this._jobProfile = profile.querySelector(data.jobSelector);
+        this._nameProfile = document.querySelector(data.nameSelector);
+        this._jobProfile = document.querySelector(data.jobSelector);
     }
 
     getUserInfo() {
-        return {this._nameProfile, this._jobProfile}
+        return {name: this._nameProfile.textContent, job: this._jobProfile.textContent};
     }
 
-    setUserInfo(newName, newJob) {
-        this._nameProfile.textContent = newName.value;
-        this._jobProfile.textContent = newJob.value;
+    setUserInfo(newUserInfo) {
+        this._nameProfile.textContent = newUserInfo.name;
+        this._jobProfile.textContent = newUserInfo.profession;
     }
 }
