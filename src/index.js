@@ -1,11 +1,13 @@
-import {PopupWithImage} from '../components/PopupWithImage.js'
-import {PopupWithForm} from '../components/PopupWithForm.js';
-import {UserInfo} from '../components/UserInfo.js';
-import {Card} from '../components/card.js';
-import {Section} from '../components/section.js';
-import {FormValidator} from '../components/FormValidator.js';
-import {initialElements} from '../utils/cards.js';
-import {config} from '../utils/config.js';
+import './pages/index.css';
+
+import {PopupWithImage} from './scripts/components/PopupWithImage.js'
+import {PopupWithForm} from './scripts/components/PopupWithForm.js';
+import {UserInfo} from './scripts/components/UserInfo.js';
+import {Card} from './scripts/components/card.js';
+import {Section} from './scripts/components/section.js';
+import {FormValidator} from './scripts/components/FormValidator.js';
+import {initialElements} from './scripts/utils/cards.js';
+import {config} from './scripts/utils/config.js';
 
 import {
     popupProfile,
@@ -15,7 +17,7 @@ import {
     buttonOpenPopupAddNewCard,
     popupAddNewCard,
     formPopupAddNewCard
-} from '../utils/constants.js';
+} from './scripts/utils/constants.js';
 
 const popupWithImage = new PopupWithImage('.popup_type_picture');
 
