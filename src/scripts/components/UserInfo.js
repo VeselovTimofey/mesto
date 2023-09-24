@@ -10,12 +10,14 @@ export class UserInfo {
         return {name: this._nameProfile.textContent, job: this._jobProfile.textContent};
     }
 
+    updateUserInfo(newUserInfo) {
+        this._nameProfile.textContent = newUserInfo.name;
+        this._jobProfile.textContent = newUserInfo.about;
+        this._imageProfile.src = newUserInfo.avatar;
+    }
+
     setUserInfo() {
         const promiseUserInfo = this._callbackGetUserInfo();
-        promiseUserInfo.then((newInfo) => {
-            this._nameProfile.textContent = newInfo.name;
-            this._jobProfile.textContent = newInfo.about;
-            this._imageProfile.src = newInfo.avatar;
-        })
+        promiseUserInfo.then(newUserInfo => this.updateUserInfo(newUserInfo));
     }
 }

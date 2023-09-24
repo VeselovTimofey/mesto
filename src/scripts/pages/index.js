@@ -6,7 +6,6 @@ import {UserInfo} from '../components/UserInfo.js';
 import {Card} from '../components/card.js';
 import {Section} from '../components/section.js';
 import {FormValidator} from '../components/FormValidator.js';
-import {initialElements} from '../utils/cards.js';
 import {config} from '../utils/config.js';
 import {Api} from '../components/api.js';
 
@@ -20,6 +19,8 @@ import {
 } from '../utils/constants.js';
 
 const api = new Api();
+const promiseUserInfo = api.getUserInfo();
+
 const popupWithImage = new PopupWithImage('.popup_type_picture');
 popupWithImage.setEventListeners();
 
@@ -30,7 +31,10 @@ const userInfo = new UserInfo({
 }, api.getUserInfo);
 
 userInfo.setUserInfo();
-const popupNewUserInfo = new PopupWithForm('.popup_type_profile', userInfo.setUserInfo.bind(userInfo));
+const popupNewUserInfo = new PopupWithForm('.popup_type_profile', (newUserInfo) => {
+    const promiseUserInfo = api.patchUserInfo(newUserInfo);
+    promiseUserInfo.then(newUserInfo => userInfo.updateUserInfo(newUserInfo));
+});
 const profileFormValidator = new FormValidator(config, popupProfile);
 profileFormValidator.enableValidation();
 popupNewUserInfo.setEventListeners();
