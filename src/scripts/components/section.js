@@ -1,8 +1,9 @@
 export class Section {
-    constructor({items, renderer}, containerSelector) {
-        this._renderedItems = items;
+    constructor({callbackPromiseItems, renderer}, containerSelector) {
+        this._callbackPromiseItems = callbackPromiseItems;
         this._renderer = renderer;
         this._container = document.querySelector(containerSelector);
+        this._listItems = [];
     }
 
     addItem(element) {
@@ -14,6 +15,9 @@ export class Section {
     }
 
     renderItems() {
-        this._renderedItems.forEach(this._renderer)
+        const promiseItems = this._callbackPromiseItems();
+        promiseItems.then((newItem) => {
+            newItem.forEach(this._renderer);
+        })
     }
 }

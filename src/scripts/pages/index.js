@@ -8,6 +8,7 @@ import {Section} from '../components/section.js';
 import {FormValidator} from '../components/FormValidator.js';
 import {initialElements} from '../utils/cards.js';
 import {config} from '../utils/config.js';
+import {Api} from '../components/api.js';
 
 import {
     popupProfile,
@@ -18,10 +19,17 @@ import {
     popupAddNewCard,
 } from '../utils/constants.js';
 
+const api = new Api();
 const popupWithImage = new PopupWithImage('.popup_type_picture');
 popupWithImage.setEventListeners();
 
-const userInfo = new UserInfo({nameSelector: '.profile__name', jobSelector: '.profile__profession'});
+const userInfo = new UserInfo({
+    nameSelector: '.profile__name',
+    jobSelector: '.profile__profession',
+    imageSelector: '.profile__avatar'
+}, api.getUserInfo);
+
+userInfo.setUserInfo();
 const popupNewUserInfo = new PopupWithForm('.popup_type_profile', userInfo.setUserInfo.bind(userInfo));
 const profileFormValidator = new FormValidator(config, popupProfile);
 profileFormValidator.enableValidation();
@@ -31,7 +39,7 @@ const newCardFormValidator = new FormValidator(config, popupAddNewCard);
 newCardFormValidator.enableValidation();
 
 const cardsList = new Section({
-    items: initialElements,
+    callbackPromiseItems: api.getFirstCards,
     renderer: (item) => {
         const card = new Card(
             item,
