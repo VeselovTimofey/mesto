@@ -3,7 +3,6 @@ export class Section {
         this._callbackPromiseItems = callbackPromiseItems;
         this._renderer = renderer;
         this._container = document.querySelector(containerSelector);
-        this._listItems = [];
     }
 
     addItem(element) {
@@ -16,8 +15,6 @@ export class Section {
 
     renderItems() {
         const promiseItems = this._callbackPromiseItems();
-        promiseItems.then((newItem) => {
-            newItem.forEach(this._renderer);
-        })
+        promiseItems.then(newItem => newItem.reverse().forEach(this._renderer))
     }
 }

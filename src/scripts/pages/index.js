@@ -1,5 +1,6 @@
 import '../../pages/index.css';
 
+import {PopupDeleteCard} from '../components/PopupDeleteCard';
 import {PopupWithImage} from '../components/PopupWithImage.js'
 import {PopupWithForm} from '../components/PopupWithForm.js';
 import {UserInfo} from '../components/UserInfo.js';
@@ -20,6 +21,8 @@ import {
 
 const api = new Api();
 const promiseUserInfo = api.getUserInfo();
+let userId = '';
+promiseUserInfo.then((userInfo) => {userId = userInfo._id});
 
 const popupWithImage = new PopupWithImage('.popup_type_picture');
 popupWithImage.setEventListeners();
@@ -28,13 +31,20 @@ const userInfo = new UserInfo({
     nameSelector: '.profile__name',
     jobSelector: '.profile__profession',
     imageSelector: '.profile__avatar'
-}, api.getUserInfo);
+}, promiseUserInfo);
 
 userInfo.setUserInfo();
 const popupNewUserInfo = new PopupWithForm('.popup_type_profile', (newUserInfo) => {
     api.patchUserInfo(newUserInfo)
         .then(jsonNewUserInfo => userInfo.updateUserInfo(jsonNewUserInfo));
 });
+
+const popupDeleteCard = new PopupDeleteCard('.popup_type_delete-card', (idCard) => {
+    api.deleteCard(idCard);
+    document.getElementById(idCard).remove();
+});
+popupDeleteCard.setEventListeners();
+
 const profileFormValidator = new FormValidator(config, popupProfile);
 profileFormValidator.enableValidation();
 popupNewUserInfo.setEventListeners();
@@ -50,7 +60,9 @@ const cardsList = new Section({
             '#element',
             (link = item.link, name = item.name) => {
                 popupWithImage.open(link, name);
-            }
+            },
+            userId,
+            (cardId) => {popupDeleteCard.open(cardId)}
         )
         const newCard = card.generateCard();
         cardsList.addItem(newCard);
@@ -60,7 +72,7 @@ const cardsList = new Section({
 const popupNewCard = new PopupWithForm(
     '.popup_type_add-card',
     (newCardData) => {
-        api.postNewCards(newCardData)
+        api.postNewCard(newCardData)
             .then(jsonNewCardData => cardsList.renderItem(jsonNewCardData))
     }
 );
