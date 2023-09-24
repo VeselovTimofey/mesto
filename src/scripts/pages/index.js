@@ -32,8 +32,8 @@ const userInfo = new UserInfo({
 
 userInfo.setUserInfo();
 const popupNewUserInfo = new PopupWithForm('.popup_type_profile', (newUserInfo) => {
-    const promiseUserInfo = api.patchUserInfo(newUserInfo);
-    promiseUserInfo.then(newUserInfo => userInfo.updateUserInfo(newUserInfo));
+    api.patchUserInfo(newUserInfo)
+        .then(jsonNewUserInfo => userInfo.updateUserInfo(jsonNewUserInfo));
 });
 const profileFormValidator = new FormValidator(config, popupProfile);
 profileFormValidator.enableValidation();
@@ -57,7 +57,13 @@ const cardsList = new Section({
     }
 }, '.elements');
 
-const popupNewCard = new PopupWithForm('.popup_type_add-card', (newCardData) => {cardsList.renderItem(newCardData)});
+const popupNewCard = new PopupWithForm(
+    '.popup_type_add-card',
+    (newCardData) => {
+        api.postNewCards(newCardData)
+            .then(jsonNewCardData => cardsList.renderItem(jsonNewCardData))
+    }
+);
 popupNewCard.setEventListeners();
 
 buttonOpenPopupProfile.addEventListener('click', () => {

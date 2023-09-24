@@ -55,4 +55,28 @@ export class Api {
                 console.log(err);
             })
     }
+
+    postNewCards(newCard) {
+        return fetch('https://mesto.nomoreparties.co/v1/cohort-75/cards', {
+            method: 'POST',
+            headers: {
+              authorization: 'a28ab119-f4d7-4d6c-a1e8-0ea16011e1f4',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              name: newCard.name,
+              link: newCard.link
+            })
+          })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                }
+                return Promise.reject(`Ошибка: ${res.status}`);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+    
 }
