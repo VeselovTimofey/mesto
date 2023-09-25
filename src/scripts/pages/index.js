@@ -38,14 +38,17 @@ const userInfo = new UserInfo({
     jobSelector: '.profile__profession',
     imageSelector: '.profile__avatar'
 }, promiseUserInfo);
-
 userInfo.setUserInfo();
+const profileFormValidator = new FormValidator(config, popupProfile);
+profileFormValidator.enableValidation();
+
 const popupNewUserInfo = new PopupWithForm('.popup_type_profile', (newUserInfo) => {
     renderLoading(true, submitChangeProfile);
     api.patchUserInfo(newUserInfo)
         .then(jsonNewUserInfo => userInfo.updateUserInfo(jsonNewUserInfo))
         .finally(() => {renderLoading(false, submitChangeProfile)});
 });
+popupNewUserInfo.setEventListeners();
 
 const popupChangeAvatar = new PopupWithForm('.popup_type_change-avatar', (newAvatar) => {
     renderLoading(true, submitChangeAvatar);
@@ -63,10 +66,6 @@ const popupDeleteCard = new PopupDeleteCard('.popup_type_delete-card', (idCard) 
     document.getElementById(idCard).remove();
 });
 popupDeleteCard.setEventListeners();
-
-const profileFormValidator = new FormValidator(config, popupProfile);
-profileFormValidator.enableValidation();
-popupNewUserInfo.setEventListeners();
 
 const newCardFormValidator = new FormValidator(config, popupAddNewCard);
 newCardFormValidator.enableValidation();
@@ -96,7 +95,7 @@ const popupNewCard = new PopupWithForm(
         renderLoading(true, submitAddNewCard);
         api.postNewCard(newCardData)
             .then(jsonNewCardData => cardsList.renderItem(jsonNewCardData))
-            .finally(() => {renderLoading(false, submitAddNewCard, submitAddNewCard.textContent)})
+            .finally(() => {renderLoading(false, submitAddNewCard, 'Создать')})
     }
 );
 popupNewCard.setEventListeners();
