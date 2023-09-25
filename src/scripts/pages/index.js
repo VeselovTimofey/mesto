@@ -29,9 +29,6 @@ const api = new Api('https://mesto.nomoreparties.co/v1/cohort-75/', {
     authorization: 'a28ab119-f4d7-4d6c-a1e8-0ea16011e1f4',
     'Content-Type': 'application/json'
 });
-const promiseUserInfo = api.getUserInfo();
-let userId = '';
-promiseUserInfo.then((userInfo) => {userId = userInfo._id});
 
 const popupWithImage = new PopupWithImage('.popup_type_picture');
 popupWithImage.setEventListeners();
@@ -39,12 +36,9 @@ popupWithImage.setEventListeners();
 const userInfo = new UserInfo({
     nameSelector: '.profile__name',
     jobSelector: '.profile__profession',
-    imageSelector: '.profile__avatar'
+    imageSelector: '.profile__avatar',
 });
-
-promiseUserInfo.then((newUserInfo) => {
-    userInfo.updateUserInfo(newUserInfo)
-})
+let userId = -1;
 
 const profileFormValidator = new FormValidator(config, popupProfile);
 profileFormValidator.enableValidation();
@@ -91,7 +85,6 @@ const newCardFormValidator = new FormValidator(config, popupAddNewCard);
 newCardFormValidator.enableValidation();
 
 const cardsList = new Section({
-    callbackPromiseItems: api.getFirstCards,
     renderer: (item) => {
         const card = new Card(
             item,
@@ -142,4 +135,12 @@ buttonOpenPopupChangeAvatar.addEventListener('click', () => {
     changeAvatarValidator.resetValidationState();
 })
 
-cardsList.renderItems();
+Promise.all([api.getUserInfo(), api.getFirstCards()])
+    .then(([newUserInfo, firstCards]) => {
+        userId = newUserInfo._id;
+        userInfo.updateUserInfo(newUserInfo);
+        cardsList.renderItems(firstCards);
+    })
+    .catch((err) => {
+        console.log(err);
+    })

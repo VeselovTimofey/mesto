@@ -1,6 +1,5 @@
 export class Section {
-    constructor({callbackPromiseItems, renderer}, containerSelector) {
-        this._callbackPromiseItems = callbackPromiseItems;
+    constructor({renderer}, containerSelector) {
         this._renderer = renderer;
         this._container = document.querySelector(containerSelector);
     }
@@ -13,8 +12,7 @@ export class Section {
         this._renderer(item);
     }
 
-    renderItems() {
-        const promiseItems = this._callbackPromiseItems();
-        promiseItems.then(newItem => newItem.reverse().forEach(this._renderer))
+    renderItems(listItems) {
+        listItems.reverse().forEach(this._renderer)
     }
 }
