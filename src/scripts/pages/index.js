@@ -25,7 +25,10 @@ import {
     submitAddNewCard
 } from '../utils/constants.js';
 
-const api = new Api();
+const api = new Api('https://mesto.nomoreparties.co/v1/cohort-75/', {
+    authorization: 'a28ab119-f4d7-4d6c-a1e8-0ea16011e1f4',
+    'Content-Type': 'application/json'
+});
 const promiseUserInfo = api.getUserInfo();
 let userId = '';
 promiseUserInfo.then((userInfo) => {userId = userInfo._id});
