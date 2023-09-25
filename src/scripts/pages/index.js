@@ -9,6 +9,7 @@ import {Section} from '../components/section.js';
 import {FormValidator} from '../components/FormValidator.js';
 import {config} from '../utils/config.js';
 import {Api} from '../components/api.js';
+import {renderLoading} from '../utils/renderLoading';
 
 import {
     popupProfile,
@@ -19,6 +20,9 @@ import {
     popupAddNewCard,
     buttonOpenPopupChangeAvatar,
     popupAvatar,
+    submitChangeProfile,
+    submitChangeAvatar,
+    submitAddNewCard
 } from '../utils/constants.js';
 
 const api = new Api();
@@ -37,13 +41,17 @@ const userInfo = new UserInfo({
 
 userInfo.setUserInfo();
 const popupNewUserInfo = new PopupWithForm('.popup_type_profile', (newUserInfo) => {
-    api.patchUserInfo(newUserInfo.link)
-        .then(jsonNewUserInfo => userInfo.updateUserInfo(jsonNewUserInfo));
+    renderLoading(true, submitChangeProfile);
+    api.patchUserInfo(newUserInfo)
+        .then(jsonNewUserInfo => userInfo.updateUserInfo(jsonNewUserInfo))
+        .finally(() => {renderLoading(false, submitChangeProfile)});
 });
 
 const popupChangeAvatar = new PopupWithForm('.popup_type_change-avatar', (newAvatar) => {
+    renderLoading(true, submitChangeAvatar);
     api.changeAvatar(newAvatar)
-        .then(jsonNewAvatar => userInfo.updateUserInfo(jsonNewAvatar));
+        .then(jsonNewAvatar => userInfo.updateUserInfo(jsonNewAvatar))
+        .finally(() => {renderLoading(false, submitChangeAvatar)});
 });
 
 const changeAvatarValidator = new FormValidator(config, popupAvatar);
@@ -85,8 +93,10 @@ const cardsList = new Section({
 const popupNewCard = new PopupWithForm(
     '.popup_type_add-card',
     (newCardData) => {
+        renderLoading(true, submitAddNewCard);
         api.postNewCard(newCardData)
             .then(jsonNewCardData => cardsList.renderItem(jsonNewCardData))
+            .finally(() => {renderLoading(false, submitAddNewCard, submitAddNewCard.textContent)})
     }
 );
 popupNewCard.setEventListeners();
