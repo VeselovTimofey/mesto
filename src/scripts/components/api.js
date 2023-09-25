@@ -1,4 +1,8 @@
 export class Api {
+    constructor(baseUrl, token) {
+        this._baseUrl = baseUrl;
+        this._token = token;
+    }
 
     _sendRequest(url, options) {
         return fetch(url, options)
@@ -8,26 +12,18 @@ export class Api {
                 }
                 return Promise.reject(`Ошибка: ${res.status}`);
             })
-            .catch((err) => {
-                console.log(err);
-            })
     }
 
     getUserInfo() {
         return this._sendRequest('https://nomoreparties.co/v1/cohort-75/users/me', { 
-            headers: {
-                authorization: 'a28ab119-f4d7-4d6c-a1e8-0ea16011e1f4'
-            }
+            headers: this._token
         })
     }
 
     patchUserInfo(newUserInfo) {
-        return this._sendRequest('https://mesto.nomoreparties.co/v1/cohort-75/users/me', {
+        return this._sendRequest(this._baseUrl + 'users/me', {
             method: 'PATCH',
-            headers: {
-              authorization: 'a28ab119-f4d7-4d6c-a1e8-0ea16011e1f4',
-              'Content-Type': 'application/json'
-            },
+            headers: this._token,
             body: JSON.stringify({
               name: newUserInfo.name,
               about: newUserInfo.profession
@@ -36,30 +32,17 @@ export class Api {
     }
 
     getFirstCards() {
-        return fetch('https://mesto.nomoreparties.co/v1/cohort-75/cards', { 
-            headers: {
-                authorization: 'a28ab119-f4d7-4d6c-a1e8-0ea16011e1f4'
-            }
-        })
-        .then((res) => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);
-        })
-        .catch((err) => {
-            console.log(err);
+        return this._sendRequest(this._baseUrl + 'cards', {
+            method: 'GET', 
+            headers: this._token
         })
     }
 
 
     postNewCard(newCard) {
-        return this._sendRequest('https://mesto.nomoreparties.co/v1/cohort-75/cards', {
+        return this._sendRequest(this._baseUrl + 'cards', {
             method: 'POST',
-            headers: {
-              authorization: 'a28ab119-f4d7-4d6c-a1e8-0ea16011e1f4',
-              'Content-Type': 'application/json'
-            },
+            headers: this._token,
             body: JSON.stringify({
               name: newCard.name,
               link: newCard.link
@@ -68,40 +51,30 @@ export class Api {
     }
 
     deleteCard(idCard) {
-        return this._sendRequest(`https://mesto.nomoreparties.co/v1/cohort-75/cards/${idCard}`, {
+        return this._sendRequest(this._baseUrl + `cards/${idCard}`, {
             method: 'DELETE',
-            headers: {
-              authorization: 'a28ab119-f4d7-4d6c-a1e8-0ea16011e1f4',
-            }
+            headers: this._token
         })
     }
 
     putLike(idCard) {
-        return this._sendRequest(`https://mesto.nomoreparties.co/v1/cohort-75/cards/${idCard}/likes`, {
+        return this._sendRequest(this._baseUrl + `cards/${idCard}/likes`, {
             method: 'PUT',
-            headers: {
-              authorization: 'a28ab119-f4d7-4d6c-a1e8-0ea16011e1f4',
-              'Content-Type': 'application/json'
-            }
+            headers: this._token
         })
     }
 
     deleteLike(idCard) {
-        return this._sendRequest(`https://mesto.nomoreparties.co/v1/cohort-75/cards/${idCard}/likes`, {
+        return this._sendRequest(this._baseUrl + `cards/${idCard}/likes`, {
             method: 'DELETE',
-            headers: {
-              authorization: 'a28ab119-f4d7-4d6c-a1e8-0ea16011e1f4',
-            }
+            headers: this._token
         })
     }
 
     changeAvatar(data) {
-        return this._sendRequest(`https://mesto.nomoreparties.co/v1/cohort-75/users/me/avatar`, {
+        return this._sendRequest(this._baseUrl + `users/me/avatar`, {
             method: 'PATCH',
-            headers: {
-              authorization: 'a28ab119-f4d7-4d6c-a1e8-0ea16011e1f4',
-              'Content-Type': 'application/json',
-            },
+            headers: this._token,
             body: JSON.stringify({avatar: data.link})
         })
     }

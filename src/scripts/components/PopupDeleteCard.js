@@ -10,7 +10,6 @@ export class PopupDeleteCard extends Popup {
     open(idCard) {
         this._buttonDelete.addEventListener('click', () => {
             this._callbackDeleteCard(idCard);
-            this.close();
         }, { once: true });
         super.open();
     }

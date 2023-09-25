@@ -25,10 +25,10 @@ import {
     submitAddNewCard
 } from '../utils/constants.js';
 
-const api = new Api();
-const promiseUserInfo = api.getUserInfo();
-let userId = '';
-promiseUserInfo.then((userInfo) => {userId = userInfo._id});
+const api = new Api('https://mesto.nomoreparties.co/v1/cohort-75/', {
+    authorization: 'a28ab119-f4d7-4d6c-a1e8-0ea16011e1f4',
+    'Content-Type': 'application/json'
+});
 
 const popupWithImage = new PopupWithImage('.popup_type_picture');
 popupWithImage.setEventListeners();
@@ -36,9 +36,10 @@ popupWithImage.setEventListeners();
 const userInfo = new UserInfo({
     nameSelector: '.profile__name',
     jobSelector: '.profile__profession',
-    imageSelector: '.profile__avatar'
-}, promiseUserInfo);
-userInfo.setUserInfo();
+    imageSelector: '.profile__avatar',
+});
+let userId = -1;
+
 const profileFormValidator = new FormValidator(config, popupProfile);
 profileFormValidator.enableValidation();
 
@@ -46,6 +47,10 @@ const popupNewUserInfo = new PopupWithForm('.popup_type_profile', (newUserInfo) 
     renderLoading(true, submitChangeProfile);
     api.patchUserInfo(newUserInfo)
         .then(jsonNewUserInfo => userInfo.updateUserInfo(jsonNewUserInfo))
+        .then(popupNewUserInfo.close())
+        .catch((err) => {
+            console.log(err);
+        })
         .finally(() => {renderLoading(false, submitChangeProfile)});
 });
 popupNewUserInfo.setEventListeners();
@@ -54,6 +59,10 @@ const popupChangeAvatar = new PopupWithForm('.popup_type_change-avatar', (newAva
     renderLoading(true, submitChangeAvatar);
     api.changeAvatar(newAvatar)
         .then(jsonNewAvatar => userInfo.updateUserInfo(jsonNewAvatar))
+        .then(popupChangeAvatar.close())
+        .catch((err) => {
+            console.log(err);
+        })
         .finally(() => {renderLoading(false, submitChangeAvatar)});
 });
 
@@ -62,8 +71,13 @@ changeAvatarValidator.enableValidation();
 popupChangeAvatar.setEventListeners();
 
 const popupDeleteCard = new PopupDeleteCard('.popup_type_delete-card', (idCard) => {
-    api.deleteCard(idCard);
-    document.getElementById(idCard).remove();
+    const targetCard = document.getElementById(idCard);
+    api.deleteCard(idCard)
+    .then(targetCard.remove())
+    .then(popupDeleteCard.close())
+    .catch((err) => {
+        console.log(err);
+    })
 });
 popupDeleteCard.setEventListeners();
 
@@ -71,7 +85,6 @@ const newCardFormValidator = new FormValidator(config, popupAddNewCard);
 newCardFormValidator.enableValidation();
 
 const cardsList = new Section({
-    callbackPromiseItems: api.getFirstCards,
     renderer: (item) => {
         const card = new Card(
             item,
@@ -94,7 +107,25 @@ const popupNewCard = new PopupWithForm(
     (newCardData) => {
         renderLoading(true, submitAddNewCard);
         api.postNewCard(newCardData)
-            .then(jsonNewCardData => cardsList.renderItem(jsonNewCardData))
+            .then((NewCardData) => {
+                const initialCard = new Card(
+                    NewCardData,
+                    '#element',
+                    (link = NewCardData.link, name = NewCardData.name) => {
+                        popupWithImage.open(link, name);
+                    },
+                    userId,
+                    (cardId) => {popupDeleteCard.open(cardId)},
+                    (idCard) => api.putLike(idCard),
+                    (idCard) => api.deleteLike(idCard)
+                )
+                const newCard = initialCard.generateCard();
+                cardsList.addItem(newCard);
+            })
+            .then(popupNewCard.close())
+            .catch((err) => {
+                console.log(err);
+            })
             .finally(() => {renderLoading(false, submitAddNewCard, 'Создать')})
     }
 );
@@ -115,6 +146,15 @@ buttonOpenPopupAddNewCard.addEventListener('click', () => {
 
 buttonOpenPopupChangeAvatar.addEventListener('click', () => {
     popupChangeAvatar.open();
+    changeAvatarValidator.resetValidationState();
 })
 
-cardsList.renderItems();
+Promise.all([api.getUserInfo(), api.getFirstCards()])
+    .then(([newUserInfo, firstCards]) => {
+        userId = newUserInfo._id;
+        userInfo.updateUserInfo(newUserInfo);
+        cardsList.renderItems(firstCards);
+    })
+    .catch((err) => {
+        console.log(err);
+    })
