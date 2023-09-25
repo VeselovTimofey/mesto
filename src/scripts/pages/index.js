@@ -17,6 +17,8 @@ import {
     inputJobPopupProfile,
     buttonOpenPopupAddNewCard,
     popupAddNewCard,
+    buttonOpenPopupChangeAvatar,
+    popupAvatar,
 } from '../utils/constants.js';
 
 const api = new Api();
@@ -35,9 +37,18 @@ const userInfo = new UserInfo({
 
 userInfo.setUserInfo();
 const popupNewUserInfo = new PopupWithForm('.popup_type_profile', (newUserInfo) => {
-    api.patchUserInfo(newUserInfo)
+    api.patchUserInfo(newUserInfo.link)
         .then(jsonNewUserInfo => userInfo.updateUserInfo(jsonNewUserInfo));
 });
+
+const popupChangeAvatar = new PopupWithForm('.popup_type_change-avatar', (newAvatar) => {
+    api.changeAvatar(newAvatar)
+        .then(jsonNewAvatar => userInfo.updateUserInfo(jsonNewAvatar));
+});
+
+const changeAvatarValidator = new FormValidator(config, popupAvatar);
+changeAvatarValidator.enableValidation();
+popupChangeAvatar.setEventListeners();
 
 const popupDeleteCard = new PopupDeleteCard('.popup_type_delete-card', (idCard) => {
     api.deleteCard(idCard);
@@ -91,6 +102,10 @@ buttonOpenPopupProfile.addEventListener('click', () => {
 buttonOpenPopupAddNewCard.addEventListener('click', () => {
     popupNewCard.open();
     newCardFormValidator.resetValidationState();
+})
+
+buttonOpenPopupChangeAvatar.addEventListener('click', () => {
+    popupChangeAvatar.open();
 })
 
 cardsList.renderItems();

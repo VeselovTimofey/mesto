@@ -1,9 +1,10 @@
 export class UserInfo {
-    constructor(data, promiseUserInfo) {
+    constructor(data, promiseUserInfo, callbackChangeAvatar) {
         this._nameProfile = document.querySelector(data.nameSelector);
         this._jobProfile = document.querySelector(data.jobSelector);
         this._imageProfile = document.querySelector(data.imageSelector);
         this._promiseUserInfo = promiseUserInfo;
+        this._changeAvatar = callbackChangeAvatar;
     }
 
     getUserInfo() {
