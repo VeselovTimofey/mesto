@@ -11,10 +11,11 @@
     </header>
     <main class="content">
         <section class="profile">
-            <img class="profile__avatar" src="<%=require('./images/avatar.png')%>" alt="Аватар пользователя.">
+            <button class="profile__avatar-button"></button>
+            <img class="profile__avatar" alt="Аватар пользователя.">
             <div class="profile__info">
-                <h1 class="profile__name">Жак-Ив Кусто</h1>
-                <p class="profile__profession">Исследователь океана</p>
+                <h1 class="profile__name"></h1>
+                <p class="profile__profession"></p>
                 <button class="profile__edit-button" type="button">
                     <img class="profile__edit-vector" src="<%=require('./images/svg/edit-button.svg')%>" alt="Кнопка изменения параметров пользователя.">
                 </button>
@@ -62,12 +63,33 @@
             <h2 class="popup__description"></h2>
         </div>
     </section>
+    <section class="popup popup_type_delete-card">
+        <div class="popup__container popup__container_size_small">
+            <button type="button" class="popup__close-icon"></button>
+            <h2 class="popup__title popup__title_size_small">Вы уверены?</h2>
+            <button type="button" class="popup__button popup__button_size_small">Да</button>
+        </div>
+    </section>
+    <section class="popup popup_type_change-avatar">
+        <div class="popup__container popup__container_size_medium">
+            <button type="button" class="popup__close-icon"></button>
+            <h2 class="popup__title popup__title_size_meduim">Обновить аватар</h2>
+            <form name="change-avatar" class="popup__form" novalidate>
+                <input type="url" name="link" placeholder="Ссылка на картинку" class="popup__input popup__input_value_image" required>
+                <span class="popup__input-error popup__input-error_value_link"></span>
+                <button type="submit" class="popup__button popup__button_size_medium">Сохранить</button>
+            </form>
+        </div>
+    </section>
     <template id="element">
         <article class="element">
             <button class="element__delete" type="button"></button>
             <img class="element__image">
             <h2 class="element__name"></h2>
-            <button class="element__like" type="button"></button>
+            <div class="element__like-frame">
+                <button class="element__like" type="button"></button>
+                <p class="element__like-number"></p>
+            </div>
         </article>
     </template>
 </body>
