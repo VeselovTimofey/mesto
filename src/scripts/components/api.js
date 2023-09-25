@@ -96,4 +96,40 @@ export class Api {
                 console.log(err);
             })
     }
+
+    putLike(idCard) {
+        return fetch(`https://mesto.nomoreparties.co/v1/cohort-75/cards/${idCard}/likes`, {
+            method: 'PUT',
+            headers: {
+              authorization: 'a28ab119-f4d7-4d6c-a1e8-0ea16011e1f4',
+            }
+          })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                }
+                return Promise.reject(`Ошибка: ${res.status}`);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
+    deleteLike(idCard) {
+        return fetch(`https://mesto.nomoreparties.co/v1/cohort-75/cards/${idCard}/likes`, {
+            method: 'DELETE',
+            headers: {
+              authorization: 'a28ab119-f4d7-4d6c-a1e8-0ea16011e1f4',
+            }
+          })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                }
+                return Promise.reject(`Ошибка: ${res.status}`);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
 }

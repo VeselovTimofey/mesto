@@ -62,7 +62,9 @@ const cardsList = new Section({
                 popupWithImage.open(link, name);
             },
             userId,
-            (cardId) => {popupDeleteCard.open(cardId)}
+            (cardId) => {popupDeleteCard.open(cardId)},
+            (idCard) => api.putLike(idCard),
+            (idCard) => api.deleteLike(idCard)
         )
         const newCard = card.generateCard();
         cardsList.addItem(newCard);
