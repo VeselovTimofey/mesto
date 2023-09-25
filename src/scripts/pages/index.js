@@ -94,8 +94,14 @@ const cardsList = new Section({
             },
             userId,
             (cardId) => {popupDeleteCard.open(cardId)},
-            (idCard) => api.putLike(idCard),
+            (idCard) => api.putLike(idCard)
+                            .catch((err) => {
+                                console.log(err);
+                            }),
             (idCard) => api.deleteLike(idCard)
+                            .catch((err) => {
+                                console.log(err);
+                            })
         )
         const newCard = card.generateCard();
         cardsList.addItem(newCard);
@@ -116,8 +122,14 @@ const popupNewCard = new PopupWithForm(
                     },
                     userId,
                     (cardId) => {popupDeleteCard.open(cardId)},
-                    (idCard) => api.putLike(idCard),
+                    (idCard) => api.putLike(idCard)
+                                    .catch((err) => {
+                                        console.log(err);
+                                    }),
                     (idCard) => api.deleteLike(idCard)
+                                    .catch((err) => {
+                                        console.log(err);
+                                    })
                 )
                 const newCard = initialCard.generateCard();
                 cardsList.addItem(newCard);

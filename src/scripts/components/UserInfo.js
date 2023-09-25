@@ -10,8 +10,8 @@ export class UserInfo {
     }
 
     updateUserInfo(userInfo) {
-        this._nameProfile.textContent = userInfo.name;
-        this._jobProfile.textContent = userInfo.about;
-        this._imageProfile.src = userInfo.avatar;
+        if (userInfo.name) {this._nameProfile.textContent = userInfo.name};
+        if (userInfo.about) {this._jobProfile.textContent = userInfo.about};
+        if (userInfo.avatar) {this._imageProfile.src = userInfo.avatar};
     }
 }

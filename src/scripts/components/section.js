@@ -8,10 +8,6 @@ export class Section {
         this._container.prepend(element);
     }
 
-    renderItem(item) {
-        this._renderer(item);
-    }
-
     renderItems(listItems) {
         listItems.reverse().forEach(this._renderer)
     }
