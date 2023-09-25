@@ -1,10 +1,8 @@
 export class UserInfo {
-    constructor(data, promiseUserInfo, callbackChangeAvatar) {
+    constructor(data) {
         this._nameProfile = document.querySelector(data.nameSelector);
         this._jobProfile = document.querySelector(data.jobSelector);
         this._imageProfile = document.querySelector(data.imageSelector);
-        this._promiseUserInfo = promiseUserInfo;
-        this._changeAvatar = callbackChangeAvatar;
     }
 
     getUserInfo() {
@@ -12,14 +10,8 @@ export class UserInfo {
     }
 
     updateUserInfo(userInfo) {
-        this._nameProfile.textContent = userInfo.name;
-        this._jobProfile.textContent = userInfo.about;
-        this._imageProfile.src = userInfo.avatar;
-    }
-
-    setUserInfo() {
-        this._promiseUserInfo.then((newUserInfo) => {
-            this.updateUserInfo(newUserInfo)
-        });
+        if (userInfo.name) {this._nameProfile.textContent = userInfo.name};
+        if (userInfo.about) {this._jobProfile.textContent = userInfo.about};
+        if (userInfo.avatar) {this._imageProfile.src = userInfo.avatar};
     }
 }

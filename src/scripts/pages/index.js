@@ -37,8 +37,12 @@ const userInfo = new UserInfo({
     nameSelector: '.profile__name',
     jobSelector: '.profile__profession',
     imageSelector: '.profile__avatar'
-}, promiseUserInfo);
-userInfo.setUserInfo();
+});
+
+promiseUserInfo.then((newUserInfo) => {
+    userInfo.updateUserInfo(newUserInfo)
+})
+
 const profileFormValidator = new FormValidator(config, popupProfile);
 profileFormValidator.enableValidation();
 
@@ -46,6 +50,10 @@ const popupNewUserInfo = new PopupWithForm('.popup_type_profile', (newUserInfo) 
     renderLoading(true, submitChangeProfile);
     api.patchUserInfo(newUserInfo)
         .then(jsonNewUserInfo => userInfo.updateUserInfo(jsonNewUserInfo))
+        .then(popupNewUserInfo.close())
+        .catch((err) => {
+            console.log(err);
+        })
         .finally(() => {renderLoading(false, submitChangeProfile)});
 });
 popupNewUserInfo.setEventListeners();
@@ -54,6 +62,10 @@ const popupChangeAvatar = new PopupWithForm('.popup_type_change-avatar', (newAva
     renderLoading(true, submitChangeAvatar);
     api.changeAvatar(newAvatar)
         .then(jsonNewAvatar => userInfo.updateUserInfo(jsonNewAvatar))
+        .then(popupChangeAvatar.close())
+        .catch((err) => {
+            console.log(err);
+        })
         .finally(() => {renderLoading(false, submitChangeAvatar)});
 });
 
@@ -62,8 +74,13 @@ changeAvatarValidator.enableValidation();
 popupChangeAvatar.setEventListeners();
 
 const popupDeleteCard = new PopupDeleteCard('.popup_type_delete-card', (idCard) => {
-    api.deleteCard(idCard);
-    document.getElementById(idCard).remove();
+    const targetCard = document.getElementById(idCard);
+    api.deleteCard(idCard)
+    .then(targetCard.remove())
+    .then(popupDeleteCard.close())
+    .catch((err) => {
+        console.log(err);
+    })
 });
 popupDeleteCard.setEventListeners();
 
@@ -95,6 +112,10 @@ const popupNewCard = new PopupWithForm(
         renderLoading(true, submitAddNewCard);
         api.postNewCard(newCardData)
             .then(jsonNewCardData => cardsList.renderItem(jsonNewCardData))
+            .then(popupNewCard.close())
+            .catch((err) => {
+                console.log(err);
+            })
             .finally(() => {renderLoading(false, submitAddNewCard, 'Создать')})
     }
 );
