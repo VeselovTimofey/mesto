@@ -139,6 +139,7 @@ buttonOpenPopupAddNewCard.addEventListener('click', () => {
 
 buttonOpenPopupChangeAvatar.addEventListener('click', () => {
     popupChangeAvatar.open();
+    changeAvatarValidator.resetValidationState();
 })
 
 cardsList.renderItems();
