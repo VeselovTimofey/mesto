@@ -107,7 +107,21 @@ const popupNewCard = new PopupWithForm(
     (newCardData) => {
         renderLoading(true, submitAddNewCard);
         api.postNewCard(newCardData)
-            .then(jsonNewCardData => cardsList.renderItem(jsonNewCardData))
+            .then((NewCardData) => {
+                const initialCard = new Card(
+                    NewCardData,
+                    '#element',
+                    (link = NewCardData.link, name = NewCardData.name) => {
+                        popupWithImage.open(link, name);
+                    },
+                    userId,
+                    (cardId) => {popupDeleteCard.open(cardId)},
+                    (idCard) => api.putLike(idCard),
+                    (idCard) => api.deleteLike(idCard)
+                )
+                const newCard = initialCard.generateCard();
+                cardsList.addItem(newCard);
+            })
             .then(popupNewCard.close())
             .catch((err) => {
                 console.log(err);
